@@ -12,7 +12,7 @@
  ~ You may elect to redistribute this code under either of these licenses.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -40,11 +40,38 @@
     <url>http://www.sonatype.com</url>
   </organization>
 
+  <mailingLists>
+    <mailingList>
+      <name>Sisu Developers List</name>
+      <subscribe>sisu-dev-subscribe@sonatype.org</subscribe>
+      <unsubscribe>sisu-dev-unsubscribe@sonatype.org</unsubscribe>
+      <post>sisu-dev@sonatype.org</post>
+      <!-- archive>?</archive -->
+    </mailingList>
+    <mailingList>
+      <name>Sisu Users List</name>
+      <subscribe>sisu-user-subscribe@sonatype.org</subscribe>
+      <unsubscribe>sisu-user-unsubscribe@sonatype.org</unsubscribe>
+      <post>sisu-user@sonatype.org</post>
+      <!-- archive>?</archive -->
+    </mailingList>
+    <mailingList>
+      <name>Sisu Commits List</name>
+      <subscribe>sisu-scm-subscribe@sonatype.org</subscribe>
+      <unsubscribe>sisu-scm-unsubscribe@sonatype.org</unsubscribe>
+    </mailingList>
+  </mailingLists>
+
   <scm>
     <connection>scm:git:git@github.com:sonatype/sisu-maven-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:sonatype/sisu-maven-plugin.git</developerConnection>
     <url>http://github.com/sonatype/sisu-maven-plugin</url>
   </scm>
+
+  <issueManagement>
+    <system>jira</system>
+    <url>https://issues.sonatype.org/browse/SISU</url>
+  </issueManagement>
 
   <ciManagement>
     <system>Hudson</system>
