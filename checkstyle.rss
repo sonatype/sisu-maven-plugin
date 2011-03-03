@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<rss version="0.91">
+  <channel>
+    <title>Sisu Maven Plugin - Checkstyle report</title>
+    <link>http://github.com/sonatype/sisu-maven-plugin</link>
+    <description>Sisu Maven Plugin - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2011 Sonatype, Inc.</copyright>
+    <item>
+      <title>File: 3,
+             Errors: 38,
+             Warnings: 0,
+             Infos: 0
+      </title>
+            <link>http://github.com/sonatype/sisu-maven-plugin/checkstyle.html</link>
+      <description>
+        <p>Click <a href="http://github.com/sonatype/sisu-maven-plugin/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="http://github.com/sonatype/sisu-maven-plugin/checkstyle.html#org.sonatype.plugins.sisu.TestIndexMojo.java">org/sonatype/plugins/sisu/TestIndexMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://github.com/sonatype/sisu-maven-plugin/checkstyle.html#org.sonatype.plugins.sisu.MainIndexMojo.java">org/sonatype/plugins/sisu/MainIndexMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://github.com/sonatype/sisu-maven-plugin/checkstyle.html#org.sonatype.plugins.sisu.IndexMojo.java">org/sonatype/plugins/sisu/IndexMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  30
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+
