@@ -214,7 +214,7 @@ public class IndexMojo
         }
     }
 
-    private static String cleanList( String list )
+    private static String cleanList( final String list )
     {
         return StringUtils.isEmpty( list ) ? "" : StringUtils.join( StringUtils.split( list ), "," );
     }
