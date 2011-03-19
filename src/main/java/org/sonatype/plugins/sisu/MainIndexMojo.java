@@ -14,13 +14,14 @@ package org.sonatype.plugins.sisu;
 import java.io.File;
 
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.project.MavenProject;
 
 /**
  * Generates a qualified class index for classes compiled by the current project.
  * 
  * @goal main-index
  * @phase process-classes
+ * @requiresDependencyResolution test
  */
 public class MainIndexMojo
     extends AbstractMojo
@@ -30,21 +31,24 @@ public class MainIndexMojo
     // ----------------------------------------------------------------------
 
     /**
-     * @parameter default-value="${project.build.outputDirectory}"
+     * The Maven project to index.
+     * 
+     * @parameter expression="${project}"
      * @required
      * @readonly
      */
-    protected File outputDirectory;
+    private MavenProject project;
 
     // ----------------------------------------------------------------------
     // Public methods
     // ----------------------------------------------------------------------
 
     public void execute()
-        throws MojoExecutionException
     {
         final IndexMojo mojo = new IndexMojo();
-        mojo.outputDirectory = outputDirectory;
+        mojo.setLog( getLog() );
+        mojo.setProject( project );
+        mojo.setOutputDirectory( new File( project.getBuild().getOutputDirectory() ) );
         mojo.execute();
     }
 }

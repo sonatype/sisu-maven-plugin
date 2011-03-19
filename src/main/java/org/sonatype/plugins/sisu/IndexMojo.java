@@ -14,12 +14,12 @@ package org.sonatype.plugins.sisu;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.shared.artifact.filter.collection.ArtifactFilterException;
 import org.apache.maven.shared.artifact.filter.collection.ArtifactIdFilter;
@@ -30,6 +30,7 @@ import org.apache.maven.shared.artifact.filter.collection.ProjectTransitivityFil
 import org.apache.maven.shared.artifact.filter.collection.ScopeFilter;
 import org.apache.maven.shared.artifact.filter.collection.TypeFilter;
 import org.codehaus.plexus.util.StringUtils;
+import org.sonatype.guice.bean.reflect.URLClassSpace;
 import org.sonatype.guice.bean.scanners.index.SisuIndex;
 
 /**
@@ -164,11 +165,41 @@ public class IndexMojo
     // Public methods
     // ----------------------------------------------------------------------
 
-    public void execute()
-        throws MojoExecutionException
+    public void setProject( final MavenProject project )
     {
-        final List<URL> urls = new ArrayList<URL>();
-        appendToClassPath( urls, outputDirectory );
+        this.project = project;
+    }
+
+    public void setOutputDirectory( final File outputDirectory )
+    {
+        this.outputDirectory = outputDirectory;
+    }
+
+    public void execute()
+    {
+        new SisuIndex( outputDirectory ).index( new URLClassSpace( getProjectClassLoader(), getIndexPath() ) );
+    }
+
+    // ----------------------------------------------------------------------
+    // Implementation methods
+    // ----------------------------------------------------------------------
+
+    private ClassLoader getProjectClassLoader()
+    {
+        final List<URL> classPath = new ArrayList<URL>();
+        appendToClassPath( classPath, outputDirectory );
+        appendToClassPath( classPath, new File( project.getBuild().getOutputDirectory() ) );
+        for ( final Object artifact : project.getArtifacts() )
+        {
+            appendToClassPath( classPath, ( (Artifact) artifact ).getFile() );
+        }
+        return URLClassLoader.newInstance( classPath.toArray( new URL[classPath.size()] ) );
+    }
+
+    private URL[] getIndexPath()
+    {
+        final List<URL> indexPath = new ArrayList<URL>();
+        appendToClassPath( indexPath, outputDirectory );
         if ( includeDependencies )
         {
             final FilterArtifacts filter = new FilterArtifacts();
@@ -184,20 +215,16 @@ public class IndexMojo
             {
                 for ( final Object artifact : filter.filter( project.getArtifacts() ) )
                 {
-                    appendToClassPath( urls, ( (Artifact) artifact ).getFile() );
+                    appendToClassPath( indexPath, ( (Artifact) artifact ).getFile() );
                 }
             }
             catch ( final ArtifactFilterException e )
             {
-                throw new MojoExecutionException( e.getMessage(), e );
+                getLog().warn( e.getLocalizedMessage() );
             }
         }
-        new SisuIndex( outputDirectory ).index( urls );
+        return indexPath.toArray( new URL[indexPath.size()] );
     }
-
-    // ----------------------------------------------------------------------
-    // Implementation methods
-    // ----------------------------------------------------------------------
 
     private void appendToClassPath( final List<URL> urls, final File file )
     {
