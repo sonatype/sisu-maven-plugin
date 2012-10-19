@@ -1,30 +1,18 @@
 Homepage
 ========
-<http://sisu.sonatype.org/>
+<http://www.eclipse.org/sisu/>
 
-Wiki
-====
-<https://docs.sonatype.org/display/SISU/Home>
+Contribution
+============
+As required by the Eclipse IP process, all contributions need to be submitted in form of patches attached to a
+[Bugzilla entry](https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Sisu), thereby being subject to the
+[Eclipse Terms of Use](http://www.eclipse.org/legal/termsofuse.php). For clarity, patches should be provided as
+standalone files attached to the issue, not as text embedded in the issue description or a comment.
 
-Issue Tracker
-=============
-<https://issues.sonatype.org/browse/SISU>
-
-Mailing Lists
-=============
-- Development of sisu:  
-  <sisu-dev@sonatype.org> to post mails  
-  <sisu-dev-subscribe@sonatype.org> to subscribe to the list
-- Usage of sisu:  
-  <sisu-user@sonatype.org> to post mails  
-  <sisu-user-subscribe@sonatype.org> to subscribe to the list
-
-Development
-===========
-Source code uses the Maven code style: <http://maven.apache.org/developers/maven-eclipse-codestyle.xml>
+When submitting patches, please follow the existing code style. The corresponding formatter settings for some IDEs can
+be taken from the [Maven Code Style](http://maven.apache.org/developers/committer-environment.html#Maven_Code_Style)
+page.
 
 License
 =======
-[Apache License, v2.0](http://www.apache.org/licenses/LICENSE-2.0.txt)
-
-[Eclipse Public License, v1.0](http://www.eclipse.org/legal/epl-v10.html)
+- [Eclipse Public License, v1.0](http://www.eclipse.org/legal/epl-v10.html)

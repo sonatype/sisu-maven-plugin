@@ -1,15 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2011 Sonatype, Inc.
+ * Copyright (c) 2010, 2012 Sonatype, Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
- * and Apache License v2.0 which accompanies this distribution.
- * The Eclipse Public License is available at
- *   http://www.eclipse.org/legal/epl-v10.html
- * The Apache License v2.0 is available at
- *   http://www.apache.org/licenses/LICENSE-2.0.html
- * You may elect to redistribute this code under either of these licenses.
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Stuart McCulloch (Sonatype, Inc.) - initial API and implementation
  *******************************************************************************/
-package org.sonatype.plugins.sisu;
+package org.eclipse.sisu.mojos;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -30,8 +29,8 @@ import org.apache.maven.shared.artifact.filter.collection.ProjectTransitivityFil
 import org.apache.maven.shared.artifact.filter.collection.ScopeFilter;
 import org.apache.maven.shared.artifact.filter.collection.TypeFilter;
 import org.codehaus.plexus.util.StringUtils;
-import org.sonatype.guice.bean.reflect.URLClassSpace;
-import org.sonatype.guice.bean.scanners.index.SisuIndex;
+import org.eclipse.sisu.reflect.URLClassSpace;
+import org.eclipse.sisu.scanners.index.SisuIndex;
 
 /**
  * Generates a qualified class index for the current project and its dependencies.
@@ -47,7 +46,7 @@ public class IndexMojo
     // ----------------------------------------------------------------------
 
     /**
-     * @parameter expression="${outputDirectory}" default-value="${project.build.outputDirectory}"
+     * @parameter property="outputDirectory" default-value="${project.build.outputDirectory}"
      * @optional
      */
     protected File outputDirectory;
@@ -55,7 +54,7 @@ public class IndexMojo
     /**
      * If we should include project dependencies when indexing.
      * 
-     * @parameter expression="${includeDependencies}" default-value="true"
+     * @parameter property="includeDependencies" default-value="true"
      * @optional
      */
     protected boolean includeDependencies;
@@ -63,7 +62,7 @@ public class IndexMojo
     /**
      * Comma separated list of GroupIds to exclude when indexing.
      * 
-     * @parameter expression="${excludeGroupIds}" default-value=""
+     * @parameter property="excludeGroupIds" default-value=""
      * @optional
      */
     protected String excludeGroupIds;
@@ -71,7 +70,7 @@ public class IndexMojo
     /**
      * Comma separated list of GroupIds to include when indexing.
      * 
-     * @parameter expression="${includeGroupIds}" default-value=""
+     * @parameter property="includeGroupIds" default-value=""
      * @optional
      */
     protected String includeGroupIds;
@@ -79,7 +78,7 @@ public class IndexMojo
     /**
      * Comma separated list of ArtifactIds to exclude when indexing.
      * 
-     * @parameter expression="${excludeArtifactIds}" default-value=""
+     * @parameter property="excludeArtifactIds" default-value=""
      * @optional
      */
     protected String excludeArtifactIds;
@@ -87,7 +86,7 @@ public class IndexMojo
     /**
      * Comma separated list of ArtifactIds to include when indexing.
      * 
-     * @parameter expression="${includeArtifactIds}" default-value=""
+     * @parameter property="includeArtifactIds" default-value=""
      * @optional
      */
     protected String includeArtifactIds;
@@ -95,7 +94,7 @@ public class IndexMojo
     /**
      * Comma Separated list of Classifiers to exclude when indexing.
      * 
-     * @parameter expression="${excludeClassifiers}" default-value=""
+     * @parameter property="excludeClassifiers" default-value=""
      * @optional
      */
     protected String excludeClassifiers;
@@ -103,7 +102,7 @@ public class IndexMojo
     /**
      * Comma Separated list of Classifiers to include when indexing.
      * 
-     * @parameter expression="${includeClassifiers}" default-value=""
+     * @parameter property="includeClassifiers" default-value=""
      * @optional
      */
     protected String includeClassifiers;
@@ -111,7 +110,7 @@ public class IndexMojo
     /**
      * Comma Separated list of Types to exclude when indexing.
      * 
-     * @parameter expression="${excludeTypes}" default-value=""
+     * @parameter property="excludeTypes" default-value=""
      * @optional
      */
     protected String excludeTypes;
@@ -119,7 +118,7 @@ public class IndexMojo
     /**
      * Comma Separated list of Types to include when indexing.
      * 
-     * @parameter expression="${includeTypes}" default-value=""
+     * @parameter property="includeTypes" default-value=""
      * @optional
      */
     protected String includeTypes;
@@ -127,7 +126,7 @@ public class IndexMojo
     /**
      * Scope to exclude. Empty string indicates no scopes (default).
      * 
-     * @parameter expression="${excludeScope}" default-value=""
+     * @parameter property="excludeScope" default-value=""
      * @optional
      */
     protected String excludeScope;
@@ -135,7 +134,7 @@ public class IndexMojo
     /**
      * Scope to include. Empty string indicates all scopes (default).
      * 
-     * @parameter expression="${includeScope}" default-value=""
+     * @parameter property="includeScope" default-value=""
      * @optional
      */
     protected String includeScope;
@@ -143,7 +142,7 @@ public class IndexMojo
     /**
      * If we should exclude transitive dependencies when indexing.
      * 
-     * @parameter expression="${excludeTransitive}" default-value="false"
+     * @parameter property="excludeTransitive" default-value="false"
      * @optional
      */
     protected boolean excludeTransitive;
@@ -155,7 +154,7 @@ public class IndexMojo
     /**
      * The Maven project to index.
      * 
-     * @parameter expression="${project}"
+     * @parameter property="project"
      * @required
      * @readonly
      */
