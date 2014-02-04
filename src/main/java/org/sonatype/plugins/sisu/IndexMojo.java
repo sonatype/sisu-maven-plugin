@@ -38,6 +38,7 @@ import org.sonatype.guice.bean.scanners.index.SisuIndex;
  * 
  * @goal index
  * @requiresDependencyResolution test
+ * @threadSafe
  */
 public class IndexMojo
     extends AbstractMojo
@@ -177,7 +178,10 @@ public class IndexMojo
 
     public void execute()
     {
-        new SisuIndex( outputDirectory ).index( new URLClassSpace( getProjectClassLoader(), getIndexPath() ) );
+        synchronized ( project )
+        {
+            new SisuIndex( outputDirectory ).index( new URLClassSpace( getProjectClassLoader(), getIndexPath() ) );
+        }
     }
 
     // ----------------------------------------------------------------------
